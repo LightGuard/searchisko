@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.searchisko</groupId>
@@ -8,9 +8,7 @@
 	<packaging>war</packaging>
 	<version>1.0.Beta-01</version>
 	<name>Searchisko</name>
-	<description>Searchisko - service that allows to index, search, retrieve and aggregate content from configurable
-		resources
-	</description>
+	<description>Searchisko - service that allows to index, search, retrieve and aggregate content from configurable resources</description>
 
 	<url>http://searchisko.org</url>
 
@@ -82,10 +80,10 @@
 		<richfaces.bom.version>4.2.2.Final-redhat-1</richfaces.bom.version>
 		<filter.name>localhost</filter.name>
 		<resteasy.version>2.3.3.Final-redhat-1</resteasy.version>
-		<structured-content-tools.version>1.2.8</structured-content-tools.version>
-		<elasticsearch-river-jira.version>1.3.1</elasticsearch-river-jira.version>
-		<elasticsearch-river-remote.version>1.2.1</elasticsearch-river-remote.version>
-		<jackson.version>1.8.0</jackson.version>
+		<structured-content-tools.version>1.2.7</structured-content-tools.version>
+		<elasticsearch-river-jira.version>1.3.0</elasticsearch-river-jira.version>
+    <elasticsearch-river-remote.version>1.1.1</elasticsearch-river-remote.version>
+    <jackson.version>1.8.0</jackson.version>
 	</properties>
 
 	<dependencyManagement>
@@ -550,9 +548,15 @@
 			<properties>
 				<es.client.embedded.data.path>${OPENSHIFT_DATA_DIR}</es.client.embedded.data.path>
 				<es.network.host>${OPENSHIFT_INTERNAL_IP}</es.network.host>
-				<persistence.xml.jta-data-source>java:jboss/datasources/MysqlDS</persistence.xml.jta-data-source>
-				<persistence.xml.hibernate.dialect>org.hibernate.dialect.MySQLDialect
-				</persistence.xml.hibernate.dialect>
+                <persistence.xml.jta-data-source>java:jboss/datasources/MysqlDS</persistence.xml.jta-data-source>
+                <persistence.xml.hibernate.dialect>org.hibernate.dialect.MySQLDialect</persistence.xml.hibernate.dialect>
+                <!--
+                    We need Elasticsearch version where issue #3166 is fixed. This is either v1.0.0 or v0.90.2.
+                    See https://github.com/elasticsearch/elasticsearch/issues/3166
+                    Until these are officially released, we have to use custom manual build (1.0.0 SNAPSHOT).
+                    IMPORTANT: Make sure this version of Elasticsearch is available in local MVN repo on OpenShift.
+                -->
+                <org.elasticsearch.version>1.0.0.Beta1-SNAPSHOT</org.elasticsearch.version>
 			</properties>
 			<dependencies>
 				<dependency>
