@@ -5,12 +5,6 @@
  */
 package org.searchisko.api.rest;
 
-import org.elasticsearch.action.search.SearchResponse;
-import org.searchisko.api.annotations.header.CORSSupport;
-import org.searchisko.api.annotations.security.GuestAllowed;
-import org.searchisko.api.annotations.security.ProviderAllowed;
-import org.searchisko.api.service.ContributorService;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -20,11 +14,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.elasticsearch.action.search.SearchResponse;
+import org.searchisko.api.annotations.header.CORSSupport;
+import org.searchisko.api.annotations.security.GuestAllowed;
+import org.searchisko.api.annotations.security.ProviderAllowed;
+import org.searchisko.api.service.ContributorService;
+
 /**
  * Contributor REST API
- * 
+ *
  * @author Libor Krzyzanek
- * 
+ *
  */
 @RequestScoped
 @Path("/contributor")
@@ -45,12 +45,12 @@ public class ContributorRestService extends RestEntityServiceBase {
 	@GuestAllowed
     @CORSSupport
 	public Object search(@QueryParam("email") String email) {
-		try {
+//		try {
 			SearchResponse response = contributorService.search(email);
 			return new ESDataOnlyResponse(response);
-		} catch (Exception e) {
-			return createErrorResponse(e);
-		}
+//		} catch (Exception e) {
+//			return createErrorResponse(e);
+//		}
 	}
 
 }
