@@ -46,7 +46,7 @@
       ],
       "index": {
         "name":"data_jbossdeveloper_quickstart",
-        "type":"jbossdeveloper_quickstart_readme",
+        "type":"jbossdeveloper_quickstart_readme"
       }
     }
   }
